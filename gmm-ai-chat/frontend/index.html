@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GMM AI Chat</title>
+  <link rel="stylesheet" href="/static/chat.css"/>
+</head>
+<body>
+  <div id="app">
+    <div id="header">
+      <h1>GMM Assistant</h1>
+      <span id="tier-badge">Enterprise</span>
+    </div>
+    <div id="messages"></div>
+    <div id="suggestions">
+      <button class="suggestion" onclick="sendSuggestion(this)">Largest market in Healthcare Services</button>
+      <button class="suggestion" onclick="sendSuggestion(this)">Top 10 fastest growing markets globally</button>
+      <button class="suggestion" onclick="sendSuggestion(this)">Compare Cloud Computing vs Cybersecurity</button>
+      <button class="suggestion" onclick="sendSuggestion(this)">Sub-markets of Financial Services</button>
+      <button class="suggestion" onclick="sendSuggestion(this)">EV market growth since 2015</button>
+    </div>
+    <div id="input-area">
+      <textarea id="user-input" placeholder="Ask about any market..." rows="1"></textarea>
+      <button id="send-btn" onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+  <script src="/static/chat.js"></script>
+</body>
+</html>
