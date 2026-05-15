@@ -2,7 +2,7 @@ import pandas as pd
 import sqlite3
 import os
 import numpy as np
-from cagr import calculate_cagr_hist, calculate_cagr_fcast
+from .cagr import calculate_cagr_hist, calculate_cagr_fcast
 
 _BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "gmm_data.db")
