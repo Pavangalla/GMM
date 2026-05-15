@@ -1,9 +1,9 @@
 import sqlite3
 import json
 import numpy as np
-from data_loader import get_conn, EMBEDDINGS_PATH
-from entitlement import apply_entitlement
-from cagr import calculate_cagr, project_future_value
+from .data_loader import get_conn, EMBEDDINGS_PATH
+from .entitlement import apply_entitlement
+from .cagr import calculate_cagr, project_future_value
 
 # ── Semantic search state (lazy-loaded) ──────────────────────────────────────
 _embed_model = None
