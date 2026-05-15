@@ -1,11 +1,11 @@
 import json
 import inspect
 from openai import OpenAI
-from system_prompt import build_system_prompt
-from tools import (search_markets, get_market, get_children, get_parent,
+from .system_prompt import build_system_prompt
+from .tools import (search_markets, get_market, get_children, get_parent,
                    get_hierarchy_path, filter_markets, compare_markets, get_market_timeseries,
                    semantic_search_markets)
-from models import ChatRequest, ChatResponse
+from .models import ChatRequest, ChatResponse
 
 client = OpenAI()
 
