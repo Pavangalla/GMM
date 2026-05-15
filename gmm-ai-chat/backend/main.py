@@ -9,7 +9,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from .models import ChatRequest, ChatResponse
 from .chat import chat
-from data_loader import build_database, build_embeddings, DB_PATH, EMBEDDINGS_PATH
+from .data_loader import build_database, build_embeddings, DB_PATH, EMBEDDINGS_PATH
 
 FRONTEND_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "frontend")
 
