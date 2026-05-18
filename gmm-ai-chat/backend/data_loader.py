@@ -5,8 +5,8 @@ import numpy as np
 from .cagr import calculate_cagr_hist, calculate_cagr_fcast
 
 _BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "gmm_data.db")
-EMBEDDINGS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "market_embeddings.npz")
+DB_PATH = "/data/gmm_data.db"
+EMBEDDINGS_PATH = "/data/market_embeddings.npz"
 YEAR_COLUMNS = [str(y) for y in range(2010, 2036)]
 
 
@@ -113,11 +113,11 @@ def build_embeddings():
     model = SentenceTransformer("all-MiniLM-L6-v2")
 
     # Name-only embeddings: captures the market concept without definition noise
-    name_embeddings = model.encode(names, batch_size=256, show_progress_bar=True, normalize_embeddings=True)
+    name_embeddings = model.encode(names, batch_size=16, show_progress_bar=True, normalize_embeddings=True)
 
     # Definition embeddings: captures full semantic context
     def_texts = [f"{r['market_name']}. {r['short_definition'] or ''}" for r in rows]
-    def_embeddings = model.encode(def_texts, batch_size=256, show_progress_bar=True, normalize_embeddings=True)
+    def_embeddings = model.encode(def_texts, batch_size=16, show_progress_bar=True, normalize_embeddings=True)
 
     np.savez(
         EMBEDDINGS_PATH,
