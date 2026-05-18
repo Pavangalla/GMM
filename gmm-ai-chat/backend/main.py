@@ -13,16 +13,30 @@ from .data_loader import build_database, build_embeddings, DB_PATH, EMBEDDINGS_P
 
 FRONTEND_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "frontend")
 
+import requests
+
+DRIVE_DB_URL = "https://drive.google.com/uc?export=download&id=1d58EOGubF0dyTL8B0YMJQDM_9XjxbGgo"
+DRIVE_NPZ_URL = "https://drive.google.com/uc?export=download&id=1WjwPLXPjeDPasUYx7-G4UQDvMdXEf7c8"
+
+def ensure_embeddings():
+    if not os.path.exists(DB_PATH):
+        print("Downloading DB from Google Drive...")
+        r = requests.get(DRIVE_DB_URL)
+        with open(DB_PATH, "wb") as f:
+            f.write(r.content)
+
+    if not os.path.exists(EMBEDDINGS_PATH):
+        print("Downloading NPZ from Google Drive...")
+        r = requests.get(DRIVE_NPZ_URL)
+        with open(EMBEDDINGS_PATH, "wb") as f:
+            f.write(r.content)
+
+    print("Embeddings ready.")
+
 @asynccontextmanager
 async def lifespan(_):
-    if not os.path.exists(DB_PATH):
-        print("Building GMM database...")
-        build_database()
-    else:
-        print("GMM database ready.")
-        if not os.path.exists(EMBEDDINGS_PATH):
-            build_embeddings()
-    yield
+    # Run once at startup
+    ensure_embeddings()
 
 app = FastAPI(title="GMM AI Chat API", version="1.0.0", lifespan=lifespan)
 
