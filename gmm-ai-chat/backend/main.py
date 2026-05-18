@@ -36,7 +36,7 @@ def ensure_embeddings():
 from contextlib import asynccontextmanager
 
 @asynccontextmanager
-def lifespan(app):
+async def lifespan(_):
     # Run once at startup
     ensure_embeddings()
     yield
