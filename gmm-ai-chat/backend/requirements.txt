@@ -1,3 +1,5 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+
 fastapi==0.115.0
 uvicorn==0.30.0
 openai>=1.0.0
@@ -5,6 +7,9 @@ pandas==2.2.0
 openpyxl==3.1.2
 python-dotenv==1.0.0
 pydantic==2.7.0
-requests==2.31.0
-sentence-transformers
-torch
+numpy==1.26.4
+scikit-learn==1.8.0
+scipy==1.17.1
+sentence-transformers==5.5.0
+torch==2.2.2
+requests
