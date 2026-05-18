@@ -34,9 +34,11 @@ def ensure_embeddings():
     print("Embeddings ready.")
 
 @asynccontextmanager
-async def lifespan(_):
+def lifespan(_):
     # Run once at startup
     ensure_embeddings()
+    yield
+
 
 app = FastAPI(title="GMM AI Chat API", version="1.0.0", lifespan=lifespan)
 
