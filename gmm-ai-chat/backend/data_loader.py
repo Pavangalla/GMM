@@ -97,7 +97,7 @@ def build_database():
     print(f"Database built: {DB_PATH}")
 
     # ── EMBEDDINGS ────────────────────────────────────────────────────────────
-    build_embeddings()
+    #build_embeddings()
 
 
 def build_embeddings():
