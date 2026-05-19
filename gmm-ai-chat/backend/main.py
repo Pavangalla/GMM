@@ -18,6 +18,18 @@ import requests
 DRIVE_DB_URL = "https://drive.google.com/uc?export=download&id=1d58EOGubF0dyTL8B0YMJQDM_9XjxbGgo"
 DRIVE_NPZ_URL = "https://drive.google.com/uc?export=download&id=1WjwPLXPjeDPasUYx7-G4UQDvMdXEf7c8"
 
+import shutil
+
+@app.post("/clear-disk")
+def clear_disk():
+    try:
+        shutil.rmtree("/data")
+        os.makedirs("/data", exist_ok=True)
+        return {"status": "disk cleared"}
+    except Exception as e:
+        return {"error": str(e)}
+
+
 def ensure_embeddings():
     if not os.path.exists(DB_PATH):
         print("Downloading DB from Google Drive...")
