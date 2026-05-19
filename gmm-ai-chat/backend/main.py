@@ -19,6 +19,13 @@ DRIVE_DB_URL = "https://drive.google.com/uc?export=download&id=1d58EOGubF0dyTL8B
 DRIVE_NPZ_URL = "https://drive.google.com/uc?export=download&id=1WjwPLXPjeDPasUYx7-G4UQDvMdXEf7c8"
 
 
+app = FastAPI(title="GMM AI Chat API", version="1.0.0", lifespan=lifespan)
+
+app.add_middleware(CORSMiddleware, allow_origins=["*"],
+                   allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+
+app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
+
 def ensure_embeddings():
     if not os.path.exists(DB_PATH):
         print("Downloading DB from Google Drive...")
@@ -38,24 +45,16 @@ async def lifespan(app):
     ensure_embeddings()
     yield
 
+#import shutil
 
-app = FastAPI(title="GMM AI Chat API", version="1.0.0", lifespan=lifespan)
-
-app.add_middleware(CORSMiddleware, allow_origins=["*"],
-                   allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
-
-app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
-
-import shutil
-
-@app.post("/clear-disk")
-def clear_disk():
-    try:
-        shutil.rmtree("/data")
-        os.makedirs("/data", exist_ok=True)
-        return {"status": "disk cleared"}
-    except Exception as e:
-        return {"error": str(e)}
+#@app.post("/clear-disk")
+#def clear_disk():
+#    try:
+#        shutil.rmtree("/data")
+#        os.makedirs("/data", exist_ok=True)
+#        return {"status": "disk cleared"}
+#    except Exception as e:
+#        return {"error": str(e)}
 
 @app.get("/")
 def serve_frontend():
