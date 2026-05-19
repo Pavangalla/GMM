@@ -11,5 +11,5 @@ numpy==1.26.4
 scikit-learn==1.8.0
 scipy==1.17.1
 sentence-transformers==5.5.0
-torch==2.2.2
+torch==2.4.0+cpu
 requests
